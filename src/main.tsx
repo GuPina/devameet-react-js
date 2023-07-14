@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Login } from './views/Login.tsx'
-
+import {RouterProvider} from 'react-router-dom'
 import './assets/styles/global.scss'
+import { router } from './router'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Login />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
