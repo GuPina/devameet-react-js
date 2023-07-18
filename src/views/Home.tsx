@@ -7,8 +7,8 @@ export const Home = () => {
     return(
         <>
             <Header />
-            <Footer/>
             <MeetHome/>
+            <Footer/>
         </>
     )
 }
