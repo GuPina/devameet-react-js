@@ -3,10 +3,11 @@
 .container-navigation {
     ul {
         display: flex;
-        justify-content: space-around;
         align-items: center;
+        justify-content: space-around;
         padding: 0;
         margin: 10px 0;
+
         li {
             list-style: none;
             cursor: pointer;
@@ -42,6 +43,7 @@
                     width: 35px;
                     height: 35px;
                 }
+
                 .mini {
                     width: 35px;
                     height: 35px;
