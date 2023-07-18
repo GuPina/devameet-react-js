@@ -2,9 +2,10 @@ import logo from '../assets/images/logoDevameet.svg'
 import mail from '../assets/images/mail.svg'
 import key from '../assets/images/key.svg'
 import { PublicInput } from '../components/general/PublicInput';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { LoginServices } from '../services/LoginServices';
 import { Link, useSearchParams } from 'react-router-dom';
+import { AuthorizeContext } from '../App';
 
 const loginServices = new LoginServices();
 
@@ -19,6 +20,8 @@ export const Login = () => {
     const [searchParams] = useSearchParams();
     const success = searchParams.get('success')
 
+    const {setToken} = useContext(AuthorizeContext)
+
     const doLogin = async() => {
         try {
             setError('');
@@ -28,7 +31,7 @@ export const Login = () => {
             }
 
             setLoading(true); 
-            await loginServices.login({login, password});
+            await loginServices.login({login, password}, setToken);
             setLoading(false);
         } catch (e: any) {
             console.log('Erro ao efetuar login:', e);
