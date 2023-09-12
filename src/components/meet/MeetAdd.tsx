@@ -47,12 +47,12 @@ export const MeetAdd = () => {
                     color={color}
                     setName={setName}
                     setColor={setColor}
+                    isEdit={false}
                 />
                 <div className="form">
                     <span onClick={goBack}>Voltar</span>
                     <button onClick={doSave} disabled={isFormInValid}
                     className={isFormInValid ? 'disabled' : ''}>Salvar</button>
-
                 </div>
             </div>
             <div className="container-objects">
