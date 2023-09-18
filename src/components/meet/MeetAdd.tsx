@@ -1,10 +1,8 @@
-import { MeetAddEditHeader } from "./MeetAddEditHeader";
-import thrashIcon from '../../assets/images/trash_object.svg';
-import rigthIcon from '../../assets/images/rotate_right.svg';
-import leftIcon from '../../assets/images/rotate_left.svg';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MeetServices } from "../../services/MeetServices";
+import { MeetAddEditHeader } from "./MeetAddEditHeader";
+import { MeetObjectsRoom } from "./MeetObjectRoom";
 
 const meetServices = new MeetServices();
 
@@ -19,21 +17,21 @@ export const MeetAdd = () => {
     }
 
     const isFormInValid = (!name || name.trim().length < 5
-    || !color || color.trim().length < 4)
+        || !color || color.trim().length < 4)
 
-    const doSave = async() => {
+    const doSave = async () => {
         try {
-            if(isFormInValid){
-                return;  
+            if (isFormInValid) {
+                return;
             }
 
-            await meetServices.createMeet({name, color});
+            await meetServices.createMeet({ name, color });
             return goBack();
         } catch (e: any) {
 
-            if(e?.response?.data?.message) {
+            if (e?.response?.data?.message) {
                 console.log('Erro ao efetuar login:', e);;
-            }else{
+            } else {
                 console.log('Erro ao efetuar login:', e);
             }
         }
@@ -42,7 +40,7 @@ export const MeetAdd = () => {
     return (
         <div className="container-principal">
             <div className="container-meet">
-                <MeetAddEditHeader 
+                <MeetAddEditHeader
                     name={name}
                     color={color}
                     setName={setName}
@@ -52,40 +50,10 @@ export const MeetAdd = () => {
                 <div className="form">
                     <span onClick={goBack}>Voltar</span>
                     <button onClick={doSave} disabled={isFormInValid}
-                    className={isFormInValid ? 'disabled' : ''}>Salvar</button>
+                        className={isFormInValid ? 'disabled' : ''}>Salvar</button>
                 </div>
             </div>
-            <div className="container-objects">
-                <div className="center">
-                    <div className="grid">
-                        <div className="line row one"/>
-                        <div className="line row two"/>
-                        <div className="line row three"/>
-                        <div className="line row four"/>
-                        <div className="line row five"/>
-                        <div className="line row six"/>
-                        <div className="line row seven"/>
-                        <div className="line column one"/>
-                        <div className="line column two"/>
-                        <div className="line column three"/>
-                        <div className="line column four"/>
-                        <div className="line column five"/>
-                        <div className="line column six"/>
-                        <div className="line column seven"/>
-                    </div>
-                    <div className="actions">
-                        <div>
-                            <img src={thrashIcon} />
-                        </div>
-                        <div>
-                            <img src={leftIcon} />
-                        </div>
-                        <div>
-                            <img src={rigthIcon} />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MeetObjectsRoom />
         </div>
     )
 }

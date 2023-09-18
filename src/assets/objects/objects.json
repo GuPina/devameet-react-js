@@ -1,11 +1,11 @@
 {
     "wall": {
         "path": "wall",
-        "selecMultiple": false,
+        "selectMultiple": false,
         "canRotate": false,
         "defaultXPosition": 0,
         "defaultYPosition": 0,
-        "defaultXIndex": 0,
+        "defaultZIndex": 0,
         "flexStart": true,
         "objects": [
             "wall_01",
@@ -16,11 +16,11 @@
 
     "floor": {
         "path": "floor",
-        "selecMultiple": false,
+        "selectMultiple": false,
         "canRotate": false,
         "defaultXPosition": 0,
         "defaultYPosition": 1,
-        "defaultXIndex": 0,
+        "defaultZIndex": 0,
         "flexStart": true,
         "objects": [
             "floor_01",
@@ -34,11 +34,11 @@
 
     "rug": {
         "path": "rug",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": false,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 1,
+        "defaultZIndex": 1,
         "objects": [
             "rug_01",
             "rug_02",
@@ -48,11 +48,11 @@
 
     "table": {
         "path": "table",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": false,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 2,
+        "defaultZIndex": 2,
         "objects": [
             "table_01",
             "table_02",
@@ -65,11 +65,11 @@
 
     "chair": {
         "path": "chair",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": true,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 2,
+        "defaultZIndex": 2,
         "objects": [
             "chair_01_blue",
             "chair_01_red",
@@ -83,11 +83,11 @@
     
     "couch": {
         "path": "couch",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": true,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 2,
+        "defaultZIndex": 2,
         "objects": [
             "couch_01",
             "couch_02",
@@ -97,11 +97,11 @@
 
     "decor": {
         "path": "decor",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": false,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 3,
+        "defaultZIndex": 3,
         "objects": [
             "decor_01",
             "decor_02",
@@ -116,11 +116,11 @@
 
     "nature": {
         "path": "nature",
-        "selecMultiple": true,
+        "selectMultiple": true,
         "canRotate": false,
         "defaultXPosition": 2,
         "defaultYPosition": 3,
-        "defaultXIndex": 3,
+        "defaultZIndex": 3,
         "objects": [
             "nature_01",
             "nature_02",

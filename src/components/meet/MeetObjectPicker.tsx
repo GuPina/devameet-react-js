@@ -1,50 +1,60 @@
-
 import { useState } from 'react';
 import downIcon from '../../assets/images/arrow_object_down.svg';
 import rightIcon from '../../assets/images/arrow_object_right.svg';
 import addIcon from '../../assets/images/plus_circle.svg';
 
-
-type MeetObjectPicker = {
+type MeetObjectPickerType = {
     image: string,
     label: string,
-    asset: string,
+    asset: any,
     selected: string,
-    setObject(s:string): void
+    setObject(s:any): void
 }
 
 export const MeetObjectPicker: React.FC<MeetObjectPickerType> = ({ image, label, asset, selected, setObject }) => {
 
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
     const getImageFromObject = (object: string) => {
-        if(object && object.trim().length > 0){
-            const path = `../../assets/objects/${asset.path}/${object}${asset.canRotate ? '_front' :'' }.png`;
+        if (object && object.trim().length > 0) {
+            const path = `../../assets/objects/${asset.path}/${object}${asset.canRotate ? '_front' : ''}.png`;
             const imageUrl = new URL(path, import.meta.url);
-            return imageUrl.href; 
+            return imageUrl.href;
         }
     }
 
-    const selectObject = (o:string) => {
-        setObject(o);
+    const selectObject = (o:string) =>{
+        const objectFinal = {
+            name: o,
+            x: asset.defaultXPosition,
+            y: asset.defaultYPosition,
+            zindex: asset.defaultZIndex,
+            orientation: asset.canRotate ? 'front' : '',
+            type: asset.path,
+            flexStart: asset.flexStart,
+            selectMultiple: asset.selectMultiple,
+        }
+                
+        setObject(objectFinal);
     }
 
     return (
         <div className="container-object-picker">
             <div className="action" onClick={() => setShow(!show)}>
-                <img src={image} />
+                <img src={image} alt={label} />
                 <span>{label}</span>
                 {!show 
                     ? <img src={downIcon} /> 
-                    : <img src={rightIcon} />}
+                    : <img src={rightIcon} />
+                }
             </div>
             {show && <div className='objects'>
                 {asset?.objects?.map((o: any) =>
-                    <div className={o === selected ? 'selected' : ''} onClick={() => selectObject(o)}>
+                    <div key={o} className={o === selected ? 'selected' : ''} onClick={() => selectObject(o)}>
                         <img src={getImageFromObject(o)}
                             className={'object ' + (asset.path === 'wall' || asset.path === 'couch' ? 'large' : '')}
-                            />
-                            <img src={addIcon} className='add'/>
+                        />
+                        <img src={addIcon} className='add' />
                     </div>
                 )}
             </div>}
