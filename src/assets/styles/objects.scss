@@ -6,10 +6,9 @@
     @media screen and (min-width: $desktopBreakpoint) {
         display: flex;
         flex: 1;
-        padding: 0.33% 0;
+        height: 100%;
         justify-content: center;
         align-items: center;
-        justify-self: center;
 
         .center {
             display: flex;
@@ -35,28 +34,32 @@
                         &.one {
                             top: 12.5%;
                         }
+
                         &.two {
                             top: 25%;
                         }
-                        &.one {
-                            top: 12.5%;
-                        }
+
                         &.three {
                             top: 37.5%;
                         }
+
                         &.four {
                             top: 50%;
                         }
+
                         &.five {
                             top: 62.5%;
                         }
+
                         &.six {
                             top: 75%;
                         }
+
                         &.seven {
                             top: 87.5%;
                         }
                     }
+
                     &.column {
                         height: 100%;
                         top: 0;
@@ -65,24 +68,27 @@
                         &.one {
                             left: 12.5%;
                         }
+
                         &.two {
                             left: 25%;
                         }
-                        &.one {
-                            left: 12.5%;
-                        }
+
                         &.three {
                             left: 37.5%;
                         }
+
                         &.four {
                             left: 50%;
                         }
+
                         &.five {
                             left: 62.5%;
                         }
+
                         &.six {
                             left: 75%;
                         }
+
                         &.seven {
                             left: 87.5%;
                         }
@@ -116,38 +122,16 @@
                     &.row-five {
                         top: 50%;
                     }
+
                     &.row-six {
                         top: 62.5%;
                     }
+
                     &.row-seven {
                         top: 75%;
                     }
-                    &.row-eight {
+                    &.row-eight{
                         top: 87.5%;
-                    }
-
-                    &.row {
-                        &.one {
-                            top: 12.5%;
-                        }
-                        &.two {
-                            top: 25%;
-                        }
-                        &.three {
-                            top: 37.5%;
-                        }
-                        &.four {
-                            top: 50%;
-                        }
-                        &.five {
-                            top: 62.5%;
-                        }
-                        &.six {
-                            top: 75%;
-                        }
-                        &.seven {
-                            top: 87.5%;
-                        }
                     }
 
                     &.column-one {
@@ -169,14 +153,16 @@
                     &.column-five {
                         left: 50%;
                     }
+
                     &.column-six {
                         left: 62.5%;
                     }
+
                     &.column-seven {
                         left: 75%;
                     }
-                    &.column-eight {
-                        top: 87.5%;
+                    &.column-eight{
+                        left: 87.5%;
                     }
                 }
             }
@@ -197,7 +183,7 @@
 
                     &.active {
                         cursor: pointer;
-                        background-color: $greyColor4;
+                        background-color: $primaryColor;
                     }
                 }
             }
