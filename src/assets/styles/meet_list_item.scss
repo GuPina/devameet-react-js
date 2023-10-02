@@ -12,6 +12,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        &.meet{
+            cursor: pointer;
+        }
         
         .color{
             width: 6px;
@@ -26,6 +30,10 @@
             line-height: 17px;
             color: $greyColor1;
             word-wrap: break-word;
+
+            &.selected{
+                color: $primaryColor3
+            }
         }
 
         img{
