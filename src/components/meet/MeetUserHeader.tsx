@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import addIcon from '../../assets/images/add.svg';
 
-export const MeetUserHeader = () => {
+type MeetUserHeaderTypeProps = {
+    isLink?:boolean
+}
+
+export const MeetUserHeader : React.FC<MeetUserHeaderTypeProps> = ({isLink}) => {
 
     const navigate = useNavigate();
     const mobile = window.innerWidth <= 992;
@@ -13,7 +17,7 @@ export const MeetUserHeader = () => {
     
     return (
         <div className="container-user-header">
-            <span>Minhas Reuniões</span>
+            <span>{isLink ? 'Reunião' : 'Minhas Reuniões'}</span>
             <div>
                 <p>Olá, {name}</p>
                 {!mobile && <img src={addIcon} alt="Adicionar reunião" onClick={navigateToAdd} />}
