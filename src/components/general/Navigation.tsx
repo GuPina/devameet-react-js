@@ -27,12 +27,12 @@ export const Navigation = () => {
             case 'home':
                 if (location.pathname !== '/user' &&
                     location.pathname !== '/link' &&
-                    location.pathname !== '/room') {
+                    location.pathname.includes('/room')) {
                     return homeActive
                 }
                 return homeIcon;
             case 'room':
-                if (location.pathname === '/room' ||
+                if (location.pathname.includes('/room') ||
                     location.pathname === '/link') {
                     return linkActive;
                 }
