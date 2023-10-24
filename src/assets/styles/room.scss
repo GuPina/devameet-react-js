@@ -1,6 +1,6 @@
-@import "./config.scss";
+@import './config.scss';
 
-.container-room{
+.container-room {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -8,7 +8,7 @@
     align-self: stretch;
 
     background-color: $primaryColorWithOpacity;
-    background-image: url("../images/background.svg");
+    background-image: url('../images/background.svg');
     background-size: cover;
 
     .empty {
@@ -21,30 +21,30 @@
         justify-content: center;
         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
 
-        img{
+        img {
             width: 70%;
         }
 
-        p{
+        p {
             font-weight: 600;
             font-size: 14px;
             line-height: 40px;
         }
     }
 
-    .resume{
+    .resume {
         margin: 16px;
 
-        span{
+        span {
             font-weight: 600;
             font-size: 12px;
             line-height: 17px;
         }
 
-        p{
+        p {
             margin: 0;
-            font-size: 700;
-            font-weight: 16px;
+            font-weight: 700;
+            font-size: 16px;
             line-height: 22px;
         }
 
@@ -54,26 +54,22 @@
         }
     }
 
-    //.container-objects{
-      // display: flex; 
-    //}//
-
     @media screen and (min-width: $desktopBreakpoint) {
         background-color: transparent;
         background-image: none;
         flex-direction: row;
         align-items: center;
 
-        .empty{
+        .empty {
             width: 40%;
             height: 40vw;
 
-            p{
+            p {
                 font-size: 20px;
             }
         }
 
-        .resume{
+        .resume {
             display: flex;
             flex-direction: column;
             height: 100%;

@@ -1,7 +1,6 @@
-import { Footer } from "../components/general/Footer"
-import { Header } from "../components/general/Header"
-import { RoomHome } from "../components/room/RoomHome"
-
+import { Footer } from "../components/general/Footer";
+import { Header } from "../components/general/Header";
+import { RoomHome } from "../components/room/RoomHome";
 
 export const RoomView = () => {
 
@@ -10,7 +9,6 @@ export const RoomView = () => {
             <Header />
             <RoomHome />
             <Footer />
-
         </>
-    )
+    );
 }

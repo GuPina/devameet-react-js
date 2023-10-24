@@ -6,12 +6,9 @@ import avatarIcon from '../../assets/images/avatar.svg';
 import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Navigation = () => {
-
     const navigate = useNavigate();
     const location = useLocation();
-
     const mobile = window.innerWidth <= 992;
-
     const avatarImage = () => {
         const avatar = localStorage.getItem('avatar');
         if (avatar) {
@@ -19,16 +16,15 @@ export const Navigation = () => {
             const imageUrl = new URL(path, import.meta.url);
             return imageUrl.href;
         }
-        return avatarIcon
+        return avatarIcon;
     }
-
     const getIcon = (name: string) => {
         switch (name) {
             case 'home':
                 if (location.pathname !== '/user' &&
                     location.pathname !== '/link' &&
-                    location.pathname.includes('/room')) {
-                    return homeActive
+                    !location.pathname.includes('/room')) {
+                    return homeActive;
                 }
                 return homeIcon;
             case 'room':
@@ -36,38 +32,34 @@ export const Navigation = () => {
                     location.pathname === '/link') {
                     return linkActive;
                 }
-                return linkIcon
+                return linkIcon;
             default:
                 return '';
         }
     }
-
     const getSelectedClass = () => {
         if (location.pathname === '/user') {
             return 'selected';
         }
         return '';
     }
-
-
     return (
-        <div className='container-navigation'>
+        <div className="container-navigation">
             <ul>
                 <li>
                     <img src={getIcon('home')} alt="Minhas reuniões" className='iconeNav' onClick={() => navigate('/')} />
                 </li>
-
                 {mobile ?
                     <li>
                         <img src={getIcon('room')} alt="Entrar na reunião" className='iconeNav' onClick={() => navigate('/link')} />
                     </li>
-                    :
+                :
                     <li className="disabled">
-                        <img src={getIcon('room')} alt="Entrar na reunião" className='iconeNav' />
+                        <img src={getIcon('room')} alt="Entrar na reunião" className='iconeNav'/>
                     </li>
                 }
                 <li>
-                    <div className={'avatar mini' + getSelectedClass()} onClick={() => navigate('/user')}>
+                    <div className={'avatar mini ' + getSelectedClass()} onClick={() => navigate('/user')}>
                         <img src={avatarImage()} alt='Editar usuário' />
                     </div>
                 </li>

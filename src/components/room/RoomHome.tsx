@@ -4,21 +4,20 @@ import copyIcon from '../../assets/images/copy.svg'
 import { useNavigate, useParams } from "react-router-dom";
 import { RoomObjects } from "./RoomObjects";
 import { RoomServices } from "../../services/RoomServices";
-import { createPeerConnecitonContext } from "../../services/WebSocketServices";
+import { createPeerConnectionContext } from "../../services/WebSocketServices";
 
 const roomServices = new RoomServices();
-const wsServices = createPeerConnecitonContext();
-
+const wsServices = createPeerConnectionContext();
 
 export const RoomHome = () => {
 
     const navigate = useNavigate();
-    const [objects, setObjects] = useState([]);
-    const [connectedUsers, setConectedUsers] = useState([]);
-    const [me, setMe] = useState<any>({});
     const [name, setName] = useState('');
     const [color, setColor] = useState('');
+    const [objects, setObjects] = useState([]);
     const { link } = useParams();
+    const [connectedUsers, setConnectedUsers] = useState([]);
+    const [me, setMe] = useState<any>({});
     const userId = localStorage.getItem('id') || '';
 
     const getRoom = async () => {
@@ -41,26 +40,27 @@ export const RoomHome = () => {
             const newObjects = objects.map((o: any) => {
                 return {...o, type : o?.name?.split('_')[0]}
             });
-            
-            setObjects(newObjects)
-        
 
+            setObjects(newObjects);
         }catch(e){
-            console.log('Ocorreu erro ao buscar dados da sala:', e)
+            console.log('Ocorreu erro ao buscar dados da sala:', e);
         }
     }
+
     useEffect(() => {
-        getRoom()
-    }, []);
+        getRoom();
+    }, [])
+
 
     const enterRoom = () => {
-        if(!link || !userId)
+        if(!link || !userId){
             return navigate('/');
+        }
 
         wsServices.joinRoom(link, userId);
         wsServices.onUpdateUserList(async(users: any) => {
             if(users){
-                setConectedUsers(users);
+                setConnectedUsers(users);
                 localStorage.setItem('connectedUsers', JSON.stringify(users));
 
                 const me = users.find((u:any) => u.user === userId);
@@ -68,13 +68,18 @@ export const RoomHome = () => {
                     setMe(me);
                     localStorage.setItem('me', JSON.stringify(me));
                 }
-
             }
-        })
+        });
 
+        wsServices.onRemoveUser((socketId: any) => {
+            const connectedStr = localStorage.getItem('connectedUsers') || '';
+            const connectedUsers = JSON.parse(connectedStr);
+            const filtered = connectedUsers?.filter((u:any) => u.clientId !== socketId);
+            setConnectedUsers(filtered);
+        })
     }
 
-    const copyLink = ()  => {
+    const copyLink = () => {
         navigator.clipboard.writeText(window.location.href);
     }
 
@@ -95,9 +100,8 @@ export const RoomHome = () => {
                             <RoomObjects 
                                 objects={objects}
                                 enterRoom={enterRoom}
-                                connectedUsers={connectedUsers} 
-                                me={me} 
-                                />
+                                connectedUsers={connectedUsers}
+                                me={me}/>
                         </>
 
                         :
