@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import emptyIcon from '../../assets/images/empty_list.svg';
 import { MeetServices } from "../../services/MeetServices";
+<<<<<<< HEAD
 import { MeetListItem } from "./MeetListItem";
 import { Modal } from "react-bootstrap";
+=======
+>>>>>>> parent of f07a050 (Aula 05 Parte 03)
 
 const meetServices = new MeetServices();
 
@@ -23,6 +26,7 @@ export const MeetList = () => {
         }
     }
 
+<<<<<<< HEAD
     const selectToRemove = (id: string) => {
         setSelected(id);
         setShowModal(true);
@@ -33,6 +37,8 @@ export const MeetList = () => {
         setShowModal(false);
     }
 
+=======
+>>>>>>> parent of f07a050 (Aula 05 Parte 03)
     useEffect(() => {
         getMeets();
     }, []);
@@ -57,7 +63,7 @@ export const MeetList = () => {
         <div className="container-meet-list">
             {meets && meets.length > 0
                 ?
-                    meets.map((meet: any) => <MeetListItem key={meet.id} meet={meet} selectToRemove={selectToRemove}/>)
+                    meets.map((meet: any) => <p>{meet.name}</p>)
                 :
                     <div className="empty">
                         <img src={emptyIcon}/>
