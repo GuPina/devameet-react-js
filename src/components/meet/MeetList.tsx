@@ -6,20 +6,25 @@ import { Modal } from "react-bootstrap";
 
 const meetServices = new MeetServices();
 
-export const MeetList = () => {
+type MeetListProps = {
+    setObjects(o: any): void,
+    setLink(s: string): void
+}
+
+export const MeetList: React.FC<MeetListProps> = ({ setObjects, setLink }) => {
 
     const [meets, setMeets] = useState([]);
-    const [ShowModal, setShowModal] = useState(false);
-    const [selected, setSelected] = useState<String | null >(null);
+    const [showModal, setShowModal] = useState(false);
+    const [selected, setSelected] = useState<string | null>(null);
 
     const getMeets = async () => {
         try {
             const result = await meetServices.getMeets();
-            if(result?.data){
+            if (result?.data) {
                 setMeets(result.data);
             }
         } catch (e) {
-            console.log('Ocorreu erro ao listar reuniões', e);
+            console.log('Ocorreu erro ao listar reuniões:', e);
         }
     }
 
@@ -33,14 +38,30 @@ export const MeetList = () => {
         setShowModal(false);
     }
 
+    const selectMeetWithObjects = async (meet: any) => {
+        try {
+            const objectsResult = await meetServices.getMeetObjectsById(meet?.id);
+
+            if (objectsResult?.data) {
+                const newObjects = objectsResult?.data?.map((e: any) => {
+                    return { ...e, type: e?.name?.split('_')[0] }
+                });
+                setObjects(newObjects);
+                setSelected(meet?.id);
+                setLink(meet?.link);
+            }
+        } catch (e) {
+            console.log('Ocorreu erro ao listar objetos da reunião:', e);
+        }
+    }
+
     useEffect(() => {
         getMeets();
     }, []);
 
-    const removeMeet = async() =>{
+    const removeMeet = async () => {
         try {
-            const result = await meetServices.getMeets();
-            if(!selected) {
+            if (!selected) {
                 return;
             }
 
@@ -48,43 +69,46 @@ export const MeetList = () => {
             await getMeets();
             cancelSelection();
         } catch (e) {
-            console.log('Ocorreu erro ao excluir reunião:', e )
+            console.log('Ocorreu erro ao excluir reunião:', e);
         }
     }
 
     return (
         <>
-        <div className="container-meet-list">
-            {meets && meets.length > 0
-                ?
-                    meets.map((meet: any) => <p>{meet.name}</p>)
-                :
+            <div className="container-meet-list">
+                {meets && meets.length > 0
+                    ?
+                    meets.map((meet: any) => <MeetListItem key={meet.id}
+                        meet={meet}
+                        selectToRemove={selectToRemove}
+                        selectMeet={selectMeetWithObjects}
+                        selected={selected || ''} />)
+                    :
                     <div className="empty">
-                        <img src={emptyIcon}/>
-                        <p>Você ainda não possui reuniões criadas :( </p>
+                        <img src={emptyIcon} />
+                        <p>Você ainda não possui reuniões criadas :(</p>
                     </div>
                 }
-        </div>
-        <Modal
-            show={ShowModal}
-            onHide={() => setShowModal(false)}
-            className="container-modal">
+            </div>
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                className="container-modal">
                 <Modal.Body>
                     <div className="content">
                         <div className="container">
-                        <span>Deletar Reunião</span>
-                        <p>Deseja deletar reunião?</p>
-                        <p>Essa ação não poderá ser desfeita.</p>
+                            <span>Deletar reunião</span>
+                            <p>Deseja deletar a reunião?</p>
+                            <p>Essa ação não poderá ser desfeita.</p>
                         </div>
                         <div className="actions">
                             <span onClick={cancelSelection}>Cancelar</span>
                             <button onClick={removeMeet}>Confirmar</button>
-
                         </div>
                     </div>
                 </Modal.Body>
-
-        </Modal>
+            </Modal>
         </>
-    )
+
+    );
 }
