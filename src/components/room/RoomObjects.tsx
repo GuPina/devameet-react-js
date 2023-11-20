@@ -2,6 +2,8 @@ import { useState } from 'react'
 import linkIcon from '../../assets/images/preview.svg'
 import micOn from '../../assets/images/On.svg'
 import micOff from '../../assets/images/Off.svg'
+import camOff from '../../assets/images/camera_off.svg'
+import camOn from '../../assets/images/camera_on.svg'
 
 
 type RoomObjectsProps = {
@@ -10,9 +12,10 @@ type RoomObjectsProps = {
     me: any,
     enterRoom(): void,
     toggleMute():void
+    toggleVideo():void
 }
 
-export const RoomObjects: React.FC<RoomObjectsProps> = ({ objects, enterRoom, connectedUsers, me, toggleMute }) => {
+export const RoomObjects: React.FC<RoomObjectsProps> = ({ objects, enterRoom, connectedUsers, me, toggleMute, toggleVideo }) => {
 
     const [objectsWithWidth, setObjectsWithWidth] = useState<Array<any>>([]);
     const mobile = window.innerWidth <= 992;
@@ -146,7 +149,7 @@ export const RoomObjects: React.FC<RoomObjectsProps> = ({ objects, enterRoom, co
         }
         return '';
     }
-    
+
     return (
         <div className="container-objects">
             <div className="center">
@@ -175,6 +178,8 @@ export const RoomObjects: React.FC<RoomObjectsProps> = ({ objects, enterRoom, co
                     }
                     {me?.user && me.muted && <img src={micOff} className='audio' onClick={toggleMute}/>}
                     {me?.user && !me.muted && <img src={micOn} className='audio' onClick={toggleMute}/>}
+                    {me?.user && !me.video && <img src={camOff} className='video' onClick={toggleVideo}/>}
+                    {me?.user && !me.video && <img src={camOn} className='video' onClick={toggleVideo}/>}
                     {(!connectedUsers || connectedUsers?.length === 0) && <div className="preview">
                             <img src={linkIcon} alt="Entrar na sala" />
                             <button onClick={enterRoom}>Entrar na sala preview</button>
