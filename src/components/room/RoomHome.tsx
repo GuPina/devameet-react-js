@@ -347,12 +347,6 @@ export const RoomHome = () => {
                                             user?.video ? <video key={user.clientId} id={user.clientId} playsInline autoPlay muted={user?.muted} /> : <audio key={user.clientId} id={user.clientId} playsInline autoPlay muted={user?.muted} />
                                         )}
                                     </div>
-                                    <div className="videos">
-                                        <video id="localVideoRef" playsInline autoPlay muted />
-                                        {getUsersWithoutMe()?.map((user: any) =>
-                                            <video key={user.clientId} id={user.clientId} playsInline autoPlay muted={user?.muted} />
-                                        )}
-                                    </div>
                                     {mobile && me?.user &&
                                         <div className="movement">
                                             <div className="button" onClick={() => doMovement({ key: 'ArrowUp' })}>
