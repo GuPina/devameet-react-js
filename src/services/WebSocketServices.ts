@@ -27,6 +27,14 @@ class PeerConnectionSession {
             callback(socketId);
         });
     }
+
+    updateUserMoviment(data: any){
+        this.socket.emit('move', data);
+    }
+
+    updateUserMute(data: any){
+        this.socket.emit('toggl-mute-user', data);
+    }
 }
 
 export const createPeerConnectionContext = () => {
